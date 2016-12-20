@@ -13,8 +13,14 @@ public class AkkaWay {
 
     private void run() {
         ActorSystem system = ActorSystem.create("CalcSystem");
-        //create actor system.
-        //create actor master (it will create workers).
+        ActorRef master = system.actorOf(Master.createMaster(), "master");
+
         //send Calculate message to master. hint: can use "noSender()" as we don't care about any final result.
+        master.tell(new Calculate(), ActorRef.noSender());
     }
 }
+/*
+      -> admin
+root -> user -> master -> router -> Worker x 8
+*/
+

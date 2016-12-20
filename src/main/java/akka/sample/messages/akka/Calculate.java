@@ -1,4 +1,6 @@
 package akka.sample.messages.akka;
 
-public class Calculate {
+import java.io.Serializable;
+
+public class Calculate implements Serializable {
 }

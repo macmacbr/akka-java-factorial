@@ -1,5 +1,6 @@
 package akka.sample.messages.akka;
 
+import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.actor.UntypedActor;
 import akka.sample.messages.hash.CalculateFactorial;
@@ -11,13 +12,15 @@ public class Worker extends UntypedActor {
 
     @Override
     public void onReceive(Object message) {
-        //receive the message to start the work and trigger the work to be done.
-        //reply with a message that work is done (and the value).
-        unhandled(message);
+        if (message instanceof Work) {
+            BigInteger res = new CalculateFactorial().calculate();
+            getSender().tell(new Result(res), ActorRef.noSender());
+        } else {
+            unhandled(message);
+        }
     }
 
     public static Props createWorker() {
-        //create an actorRef of Worker with empty array
-        return null;
+        return Props.create(Worker.class, new ArraySeq<Object>(0));
     }
 }

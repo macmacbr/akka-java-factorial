@@ -1,8 +1,11 @@
 package akka.sample.messages.akka;
 
+import sun.plugin2.message.Serializer;
+
+import java.io.Serializable;
 import java.math.BigInteger;
 
-public class Result {
+public class Result implements Serializable {
 
     private BigInteger bigInt;
 

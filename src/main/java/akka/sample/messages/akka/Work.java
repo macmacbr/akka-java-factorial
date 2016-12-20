@@ -1,4 +1,6 @@
 package akka.sample.messages.akka;
 
-public class Work {
+import java.io.Serializable;
+
+public class Work implements Serializable {
 }
